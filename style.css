@@ -1,0 +1,23 @@
+body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+}
+
+.nav-btn, .track-btn {
+    display: block;
+    margin: 10px auto;
+    padding: 12px 25px;
+    background: #222;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.nav-btn:hover, .track-btn:hover {
+    background: #444;
+}
