@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Polytrack</title>
+    <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+
+<h1>Polytrack</h1>
+
+<h2>Real Tracks</h2>
+<div id="real"></div>
+
+<h2>Ruined Tracks</h2>
+<div id="ruined"></div>
+
+<h2>Fake Tracks</h2>
+<div id="fake"></div>
+
+<h2>City Tracks</h2>
+<div id="city"></div>
+
+<script>
+const categories = {
+    "real tracks": ["track1", "track2"],
+    "ruined tracks": ["ruined1", "ruined2"],
+    "fake tracks": ["fake1", "fake2"],
+    "city tracks": ["city1", "city2"]
+};
+
+function createButtons() {
+    for (const folder in categories) {
+        const id = folder.split(" ")[0]; // real, ruined, fake, city
+        const container = document.getElementById(id);
+
+        categories[folder].forEach(track => {
+            const btn = document.createElement("button");
+            btn.className = "track-btn";
+            btn.textContent = track;
+            btn.onclick = () => copyTrack(folder, track);
+            container.appendChild(btn);
+        });
+    }
+}
+
+function copyTrack(folder, track) {
+    const path = `${folder}/${track}.txt`;
+
+    fetch(path)
+        .then(res => res.text())
+        .then(code => {
+            navigator.clipboard.writeText(code);
+            alert(`${track} copied to clipboard`);
+        })
+        .catch(() => alert("Error loading track file"));
+}
+
+createButtons();
+</script>
+
+</body>
+</html>
